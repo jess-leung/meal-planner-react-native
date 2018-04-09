@@ -13,14 +13,13 @@ import {
 } from 'react-native-elements';
 
 export default class MealPlanScreen extends Component<{}> {
+  static navigationOptions = {
+    title: 'Meal Planner',
+  };
+
   render() {
     return (
       <View>
-        <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: 'Meal Planner', style: { color: '#fff' } }}
-          backgroundColor='#4CAF50'
-        />
         <FlatList
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
           { title: 'THURSDAY', key: 'thursday' }, { title: 'FRIDAY', key: 'friday' }]}
