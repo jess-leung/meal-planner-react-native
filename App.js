@@ -7,7 +7,7 @@ const RootStack = StackNavigator({
   Home: {
     screen: MealPlanScreen,
   },
-  AddMealScreen: {
+  AddMeal: {
     screen: AddMealScreen,
   },
 }, {

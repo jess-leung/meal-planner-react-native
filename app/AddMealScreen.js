@@ -3,7 +3,7 @@ import {
     Text
 } from 'react-native';
 
-export default class MealPlanScreen extends Component<{}> {
+export default class MealPlanScreen extends React.Component {
     static navigationOptions = {
         title: 'Add Meal',
     };

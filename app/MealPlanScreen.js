@@ -12,7 +12,7 @@ import {
   Button
 } from 'react-native-elements';
 
-export default class MealPlanScreen extends Component<{}> {
+export default class MealPlanScreen extends React.Component {
   static navigationOptions = {
     title: 'Meal Planner',
     
@@ -34,6 +34,7 @@ export default class MealPlanScreen extends Component<{}> {
                   borderWidth: 0,
                   borderRadius: 5,
                 }}
+                onPress={() => this.props.navigation.navigate('AddMeal')}
                 title='ADD MEAL' />
             </Card>}
         />
