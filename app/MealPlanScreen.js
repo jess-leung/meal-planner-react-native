@@ -15,7 +15,6 @@ import {
 export default class MealPlanScreen extends React.Component {
   static navigationOptions = {
     title: 'Meal Planner',
-    
   };
 
   render() {
