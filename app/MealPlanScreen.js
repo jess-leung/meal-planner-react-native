@@ -15,6 +15,7 @@ import {
 export default class MealPlanScreen extends Component<{}> {
   static navigationOptions = {
     title: 'Meal Planner',
+    
   };
 
   render() {
@@ -28,7 +29,7 @@ export default class MealPlanScreen extends Component<{}> {
               <Text>No meals</Text>
               <Button
                 buttonStyle={{
-                  backgroundColor: '#4CAF50',
+                  backgroundColor: '#3F51B5',
                   borderColor: 'transparent',
                   borderWidth: 0,
                   borderRadius: 5,
