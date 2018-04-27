@@ -15,6 +15,10 @@ class LoginFormComponent extends React.Component {
         if (!prevProps.error && this.props.error) {
             Alert.alert('Error', this.props.error);
         }
+
+        if(!prevProps.error && !this.props.error && this.props.user != null) {
+            this.props.navigation.navigate('MealPlan')
+        }
     }
 
     render() {
@@ -36,7 +40,9 @@ class LoginFormComponent extends React.Component {
 
 LoginFormComponent.propTypes = {
     loginUser: PropTypes.func.isRequired,
-    goToRegistration: PropTypes.func.isRequired
+    goToRegistration: PropTypes.func.isRequired,
+    error: PropTypes.string,
+    user: PropTypes.string
 }
 
 export default LoginFormComponent

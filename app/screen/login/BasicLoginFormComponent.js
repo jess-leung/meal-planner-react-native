@@ -56,6 +56,6 @@ class BasicLoginFormComponent extends React.Component {
 BasicLoginFormComponent.propTypes = {
     buttonTitle: PropTypes.string.isRequired,
     onButtonPress: PropTypes.func.isRequired,
-  }
+}
  
 export default BasicLoginFormComponent

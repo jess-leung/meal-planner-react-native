@@ -1,6 +1,7 @@
 import React from 'react';
 import MealPlanScreen from './app/MealPlanScreen';
 import AddMealScreen from './app/AddMealScreen';
+import AuthLoadingScreen from './app/screen/authLoading/AuthLoadingScreen';
 import LoginScreen from './app/screen/login/LoginScreen';
 import RegistrationScreen from './app/screen/registration/RegistrationScreen';
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
@@ -53,10 +54,11 @@ const AppStack = StackNavigator({
   });
 
 const AppNavigator = SwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
   App: AppStack,
   Auth: AuthStack,
 }, {
-    initialRouteName: 'Auth',
+    initialRouteName: 'AuthLoading',
 });
 
 export default class App extends React.Component {
