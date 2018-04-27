@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LoginFormComponent from './LoginFormComponent';
 import { loginUser } from '../../store/session/actions';
 import { connect } from 'react-redux'
+import LoginFormComponent from './LoginFormComponent';
 
 class LoginScreen extends React.Component {
     static navigationOptions = {
         title: 'Login',
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <LoginFormComponent
-                login={this.props.login}
+                loginUser={this.props.loginUser}
                 goToRegistration={() => this.props.navigation.navigate('Registration')} />
         );
     }
 }
 
 LoginScreen.propTypes = {
-    login: PropTypes.func.isRequired
+    loginUser: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
-    login: loginUser
+    loginUser: loginUser,
 }
 
-export default connect(null, mapDispatchToProps)(LoginScreen)
+const mapStateToProps = state => ({
+    loading: state.session.loading,
+    error: state.session.error,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

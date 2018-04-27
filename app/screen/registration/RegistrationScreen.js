@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'react-native';
 import { connect } from 'react-redux'
 import { signupUser } from '../../store/session/actions';
 import RegistrationFormComponent from './RegistrationFormComponent';
@@ -13,17 +12,24 @@ class RegistrationScreen extends React.Component {
     render() {
         return (
             <RegistrationFormComponent
-                register={this.props.register} />
+                signupUser={this.props.signupUser}
+                error={this.props.error}
+            />
         );
     }
 }
 
 RegistrationScreen.propTypes = {
-    register: PropTypes.func.isRequired
+    signupUser: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
-    signup: signupUser
-  }
-   
-export default connect(null, mapDispatchToProps)(RegistrationScreen)
+    signupUser: signupUser,
+}
+
+const mapStateToProps = state => ({
+    loading: state.session.loading,
+    error: state.session.error,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationScreen)

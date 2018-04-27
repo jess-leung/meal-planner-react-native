@@ -22,7 +22,7 @@ class BasicLoginFormComponent extends React.Component {
             this.setState({ password: password });
         }
         this.onButtonPress = () => {
-            // this.props.onButtonPress(this.state.email, this.state.password)
+            this.props.onButtonPress(this.state.email, this.state.password)
         }
     }
 
