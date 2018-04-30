@@ -1,6 +1,6 @@
 import React from 'react';
 import MealPlanScreen from './app/MealPlanScreen';
-import AddMealScreen from './app/AddMealScreen';
+import AddMealScreen from './app/screen/addMeal/AddMealScreen';
 import AuthLoadingScreen from './app/screen/authLoading/AuthLoadingScreen';
 import LoginScreen from './app/screen/login/LoginScreen';
 import RegistrationScreen from './app/screen/registration/RegistrationScreen';
