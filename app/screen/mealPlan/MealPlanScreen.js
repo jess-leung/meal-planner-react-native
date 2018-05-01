@@ -4,22 +4,36 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  FlatList
+  FlatList,
+  Modal
 } from 'react-native';
 import {
   Header,
   Card,
   Button
 } from 'react-native-elements';
+import MealTypeSelectionModal from './MealTypeSelectionModal';
 
 export default class MealPlanScreen extends React.Component {
   static navigationOptions = {
     title: 'Meal Planner',
   };
 
+  constructor(props) {
+    super(props);
+    this.shouldShowAddMealModal = () => {
+      if (this.props.navigation.state.params) {
+        return this.props.navigation.getParam('addMealModalVisible');
+      }
+      return false;
+    }
+  }
+  
   render() {
     return (
       <View>
+        <MealTypeSelectionModal
+          showAddMealModal={this.shouldShowAddMealModal()} />
         <FlatList
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
           { title: 'THURSDAY', key: 'thursday' }, { title: 'FRIDAY', key: 'friday' }]}

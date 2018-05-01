@@ -10,11 +10,11 @@ export const addMeal = (name) => {
         })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
-                dispatch(addMealSuccess())
+                dispatch(addMealSuccess(name))
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);
-                dispatch(addMealError())
+                dispatch(addMealError(error))
             });
     }
 }

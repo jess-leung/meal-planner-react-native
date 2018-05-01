@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
@@ -6,6 +7,10 @@ class AddMealComponent extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.error && this.props.error) {
             Alert.alert('Error', this.props.error);
+        }
+
+        if (!prevProps.error && this.props.meal) {
+            this.props.navigation.navigate('MealPlan', { 'addMealModalVisible': true });
         }
     }
 
@@ -34,7 +39,8 @@ class AddMealComponent extends React.Component {
 }
 
 AddMealComponent.propTypes = {
-    error: PropTypes.string
+    error: PropTypes.string,
+    meal: PropTypes.string, 
 }
 
 export default AddMealComponent

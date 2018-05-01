@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import session from './session/reducer';
-import addMealReducer from './addMeal/reducer';
+import addMeal from './addMeal/reducer';
 
 const rootReducer = combineReducers({
   session,
-  addMealReducer
+  addMeal,
 });
 
 export default rootReducer;

@@ -6,7 +6,7 @@ import { addMeal } from '../../store/addMeal/actions'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class MealPlanScreen extends React.Component {
+class AddMealScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,7 +58,11 @@ class MealPlanScreen extends React.Component {
 
     render() {
         return (
-            <AddMealComponent callbackFromParent={this.getMeal} />
+            <AddMealComponent 
+                meal={this.props.meal}
+                error={this.props.error}
+                navigation={this.props.navigation}
+                callbackFromParent={this.getMeal} />
         );
     }
 }
@@ -72,8 +76,9 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-    loading: state.session.loading,
-    error: state.session.error
-})
+    loading: state.addMeal.loading,
+    error: state.addMeal.error,
+    meal: state.addMeal.meal,
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(MealPlanScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(AddMealScreen)

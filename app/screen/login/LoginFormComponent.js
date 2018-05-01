@@ -1,4 +1,4 @@
-import React, { component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BasicLoginFormComponent from './BasicLoginFormComponent';
 import {
@@ -17,7 +17,7 @@ class LoginFormComponent extends React.Component {
         }
 
         if(!prevProps.error && !this.props.error && this.props.user != null) {
-            this.props.navigation.navigate('MealPlan')
+            this.props.navigation.navigate('MealPlan');
         }
     }
 
