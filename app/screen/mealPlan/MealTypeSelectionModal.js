@@ -13,11 +13,6 @@ import {
 
 
 class MealTypeSelectionModal extends React.Component {
-
-    component1 = () => <Text>Hello</Text>
-    component2 = () => <Text>World</Text>
-    component3 = () => <Text>ButtonGroup</Text>
-
     setClosingModal = () => {
         this.setState({ isModalVisible: false });
     }
