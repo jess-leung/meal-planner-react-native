@@ -10,7 +10,11 @@ class AddMealComponent extends React.Component {
         }
 
         if (!prevProps.error && this.props.meal) {
-            this.props.navigation.navigate('MealPlan', { 'addMealModalVisible': true });
+            this.props.navigation.navigate('MealPlan', { 
+                'addMealModalVisible': true, 
+                'mealName': this.state.mealName,
+                'dayOfWeek': this.props.navigation.getParam('dayOfWeek') 
+            });
         }
     }
 

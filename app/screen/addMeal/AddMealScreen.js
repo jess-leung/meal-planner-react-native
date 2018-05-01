@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AddMealComponent from './AddMealComponent'
-import { addMeal } from '../../store/addMeal/actions'
+import { addMeal } from '../../store/meal/actions'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { InteractionManager } from 'react-native';
@@ -34,8 +34,6 @@ class AddMealScreen extends React.Component {
     }
 
     static navigationOptions = ({ navigation }) => {
-        const { params } = navigation.state;
-        console.log(navigation.state.params);
         return {
             title: 'Add Meal',
             headerRight: < Button

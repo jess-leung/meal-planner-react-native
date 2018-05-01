@@ -14,7 +14,10 @@ import {
   Button
 } from 'react-native-elements';
 import MealTypeSelectionModal from './MealTypeSelectionModal';
-import { addMeal } from '../../store/addMeal/actions';
+import { addMeal } from '../../store/meal/actions';
+import { addPlannedMeal } from '../../store/plannedMeal/actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class MealPlanScreen extends React.Component {
   static navigationOptions = {
@@ -29,12 +32,17 @@ class MealPlanScreen extends React.Component {
       }
       return false;
     }
+    this.onMealAdded = (mealType) => {
+      this.props.addPlannedMeal(this.props.navigation.getParam('mealName'), 
+      this.props.navigation.getParam('dayOfWeek'), mealType);
+    }
   }
 
   render() {
     return (
       <View>
         <MealTypeSelectionModal
+          onMealAdded={this.onMealAdded.bind(this)}
           isAddingMeal={this.isAddingMeal()} />
         <FlatList
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
@@ -49,7 +57,7 @@ class MealPlanScreen extends React.Component {
                   borderWidth: 0,
                   borderRadius: 5,
                 }}
-                onPress={() => this.props.navigation.navigate('AddMeal')}
+                onPress={() => this.props.navigation.navigate('AddMeal', { dayOfWeek: item.key })}
                 title='ADD MEAL' />
             </Card>}
         />
@@ -58,4 +66,18 @@ class MealPlanScreen extends React.Component {
   }
 }
 
-export default MealPlanScreen
+MealPlanScreen.propTypes = {
+  addPlannedMeal: PropTypes.func.isReqsuired
+}
+
+const mapDispatchToProps = {
+  addPlannedMeal: addPlannedMeal,
+}
+
+const mapStateToProps = state => ({
+  loading: state.plannedMeal.loading,
+  error: state.plannedMeal.error,
+  plannedMeal: state.plannedMeal.plannedMeal,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealPlanScreen)

@@ -11,6 +11,7 @@ import {
     ButtonGroup
 } from 'react-native-elements';
 
+const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
 class MealTypeSelectionModal extends React.Component {
     setClosingModal = () => {
@@ -22,13 +23,13 @@ class MealTypeSelectionModal extends React.Component {
         this.state = {
             isModalVisible: this.props.isAddingMeal
         }
+        this.updateSelectedMealType = (selectedIndex) => {
+            this.setClosingModal();
+            this.props.onMealAdded(mealTypes[selectedIndex]);
+        }
     }
+
     render() {
-        const component1 = () => <Text>Breakfast</Text>
-        const component2 = () => <Text>Lunch</Text>
-        const component3 = () => <Text>Dinner</Text>
-        const component4 = () => <Text>Snack</Text>
-        const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }, { element: component4 }]
         return (
             <Modal
                 visible={this.state.isModalVisible}
@@ -46,8 +47,8 @@ class MealTypeSelectionModal extends React.Component {
                     }}>
                         <Text>Choose meal type</Text>
                         <ButtonGroup
-                            onPress={this.updateIndex}
-                            buttons={buttons}
+                            onPress={this.updateSelectedMealType}
+                            buttons={mealTypes}
                             containerBorderRadius='0'
                             containerStyle={{
                                 flex: 1,
@@ -62,5 +63,7 @@ class MealTypeSelectionModal extends React.Component {
         );
     }
 }
+
+
 
 export default MealTypeSelectionModal
