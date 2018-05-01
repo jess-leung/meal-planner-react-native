@@ -5,7 +5,8 @@ import {
   Text,
   View,
   FlatList,
-  Modal
+  Modal,
+  InteractionManager
 } from 'react-native';
 import {
   Header,
@@ -13,27 +14,28 @@ import {
   Button
 } from 'react-native-elements';
 import MealTypeSelectionModal from './MealTypeSelectionModal';
+import { addMeal } from '../../store/addMeal/actions';
 
-export default class MealPlanScreen extends React.Component {
+class MealPlanScreen extends React.Component {
   static navigationOptions = {
     title: 'Meal Planner',
   };
 
   constructor(props) {
     super(props);
-    this.shouldShowAddMealModal = () => {
+    this.isAddingMeal = () => {
       if (this.props.navigation.state.params) {
         return this.props.navigation.getParam('addMealModalVisible');
       }
       return false;
     }
   }
-  
+
   render() {
     return (
       <View>
         <MealTypeSelectionModal
-          showAddMealModal={this.shouldShowAddMealModal()} />
+          isAddingMeal={this.isAddingMeal()} />
         <FlatList
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
           { title: 'THURSDAY', key: 'thursday' }, { title: 'FRIDAY', key: 'friday' }]}
@@ -55,3 +57,5 @@ export default class MealPlanScreen extends React.Component {
     );
   }
 }
+
+export default MealPlanScreen

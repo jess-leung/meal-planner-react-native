@@ -5,6 +5,7 @@ import AddMealComponent from './AddMealComponent'
 import { addMeal } from '../../store/addMeal/actions'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { InteractionManager } from 'react-native';
 
 class AddMealScreen extends React.Component {
     constructor(props) {
@@ -15,8 +16,10 @@ class AddMealScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({
-            onAddMealPress: this.onAddMealPress
+        InteractionManager.runAfterInteractions(() => {
+            this.props.navigation.setParams({
+                onAddMealPress: this.onAddMealPress
+            });
         });
     }
 
@@ -43,7 +46,7 @@ class AddMealScreen extends React.Component {
                     margin: 12
                 }
                 }
-                onPress={ navigation.getParam('onAddMealPress') }
+                onPress={navigation.getParam('onAddMealPress')}
                 title=''
                 icon={
                     < Icon
@@ -58,7 +61,7 @@ class AddMealScreen extends React.Component {
 
     render() {
         return (
-            <AddMealComponent 
+            <AddMealComponent
                 meal={this.props.meal}
                 error={this.props.error}
                 navigation={this.props.navigation}
