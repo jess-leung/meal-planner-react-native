@@ -23,6 +23,22 @@ export const addPlannedMeal = (name, day, mealType) => {
     }
 }
 
+export const getPlannedMeals = () => {
+    return (dispath) => {
+        firestore.collection("planned-meals")
+            .get()
+            .then(function (querySnapshot) {
+                console.log(querySnapshot);
+                dispatch(getPlannedMealsSuccess(querySnapshot));
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+                dispatch(getPlannedMealsError(error));
+                
+            });
+    }
+}
+
 const addPlannedMealLoading = () => ({
     type: types.ADD_PLANNED_MEAL_LOADING
 });
@@ -36,3 +52,13 @@ const addPlannedMealError = error => ({
     type: types.ADD_PLANNED_MEAL_ERROR,
     error
 });
+
+const getPlannedMealsSuccess = plannedMeals => ({
+    type: types.GET_PLANNED_MEALS_SUCCESS,
+    plannedMeals
+});
+
+const getPlannedMealsError = error => ({
+    type: types.GET_PLANNED_MEALS_ERROR,
+    error
+})
