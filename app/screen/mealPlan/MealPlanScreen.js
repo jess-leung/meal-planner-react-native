@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import {
   Header,
-  Card,
-  Button
 } from 'react-native-elements';
+import PlannedMealsCard from './PlannedMealsCard';
 import MealTypeSelectionModal from './MealTypeSelectionModal';
 import { addMeal } from '../../store/meal/actions';
 import { addPlannedMeal, getPlannedMeals } from '../../store/plannedMeal/actions';
@@ -36,7 +35,14 @@ class MealPlanScreen extends React.Component {
       this.props.addPlannedMeal(this.props.navigation.getParam('mealName'),
         this.props.navigation.getParam('dayOfWeek'), mealType);
     }
-    this.props.getPlannedMeals();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.error && this.props.error) {
+      Alert.alert('Error', this.props.error);
+    } else if (this.props.plannedMeal != null) {
+      this.props.getPlannedMeals();
+    } 
   }
 
   render() {
@@ -49,18 +55,10 @@ class MealPlanScreen extends React.Component {
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
           { title: 'THURSDAY', key: 'thursday' }, { title: 'FRIDAY', key: 'friday' }]}
           renderItem={({ item }) =>
-            <Card title={item.title} >
-              <Text>No meals</Text>
-              <Button
-                buttonStyle={{
-                  backgroundColor: '#3F51B5',
-                  borderColor: 'transparent',
-                  borderWidth: 0,
-                  borderRadius: 5,
-                }}
-                onPress={() => this.props.navigation.navigate('AddMeal', { dayOfWeek: item.key })}
-                title='ADD MEAL' />
-            </Card>}
+            <PlannedMealsCard 
+              navigation={this.props.navigation}
+              dayOfWeek={item.key} />
+            }
         />
       </View>
     );
@@ -81,6 +79,7 @@ const mapStateToProps = state => ({
   loading: state.plannedMeal.loading,
   error: state.plannedMeal.error,
   plannedMeal: state.plannedMeal.plannedMeal,
-})
+  plannedMeals: state.plannedMeal.plannedMeals
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MealPlanScreen)
