@@ -16,9 +16,9 @@ const plannedMeal = (state = initialState, action) => {
         case types.ADD_PLANNED_MEAL_LOADING:
             return { ...state, plannedMeal: null, error: null, loading: true, plannedMeals: null }
         case types.GET_PLANNED_MEALS_SUCCESS:
-            return { ...state, plannedMeals: action.plannedMeals, error: null, plannedMeal: null }
+            return { ...state, plannedMeal: null, error: null, loading: true, plannedMeals: action.plannedMeals }
         case types.GET_PLANNED_MEALS_ERROR:
-            return { ...state, plannedMeals: null, error: action.error, plannedMeal: null }
+            return { ...state, plannedMeal: null, error: action.error, loading: true, plannedMeals: null }
         default:
             return state
     }

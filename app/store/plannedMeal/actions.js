@@ -23,9 +23,10 @@ export const addPlannedMeal = (name, day, mealType) => {
     }
 }
 
-export const getPlannedMeals = () => {
-    return (dispath) => {
+export const getPlannedMealsGivenDay = (day) => {
+    return (dispatch) => {
         firestore.collection("planned-meals")
+            .where("day", "==", day)
             .get()
             .then(function (querySnapshot) {
                 console.log(querySnapshot);
@@ -34,7 +35,7 @@ export const getPlannedMeals = () => {
             .catch(function (error) {
                 console.log("Error getting documents: ", error);
                 dispatch(getPlannedMealsError(error));
-                
+
             });
     }
 }

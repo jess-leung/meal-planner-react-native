@@ -14,7 +14,7 @@ import {
 import PlannedMealsCard from './PlannedMealsCard';
 import MealTypeSelectionModal from './MealTypeSelectionModal';
 import { addMeal } from '../../store/meal/actions';
-import { addPlannedMeal, getPlannedMeals } from '../../store/plannedMeal/actions';
+import { addPlannedMeal } from '../../store/plannedMeal/actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -35,14 +35,6 @@ class MealPlanScreen extends React.Component {
       this.props.addPlannedMeal(this.props.navigation.getParam('mealName'),
         this.props.navigation.getParam('dayOfWeek'), mealType);
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.error && this.props.error) {
-      Alert.alert('Error', this.props.error);
-    } else if (this.props.plannedMeal != null) {
-      this.props.getPlannedMeals();
-    } 
   }
 
   render() {
@@ -66,13 +58,11 @@ class MealPlanScreen extends React.Component {
 }
 
 MealPlanScreen.propTypes = {
-  addPlannedMeal: PropTypes.func.isReqsuired,
-  getPlannedMeals: PropTypes.func.isRequired
+  addPlannedMeal: PropTypes.func.isReqsuired
 }
 
 const mapDispatchToProps = {
   addPlannedMeal: addPlannedMeal,
-  getPlannedMeals: getPlannedMeals,
 }
 
 const mapStateToProps = state => ({
