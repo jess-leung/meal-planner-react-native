@@ -16,7 +16,7 @@ class LoginFormComponent extends React.Component {
             Alert.alert('Error', this.props.error);
         }
 
-        if(!prevProps.error && !this.props.error && this.props.user != null) {
+        if(!prevProps.error && !this.props.error && this.props.user != null && this.props.user !== prevProps.user) {
             this.props.navigation.navigate('MealPlan');
         }
     }

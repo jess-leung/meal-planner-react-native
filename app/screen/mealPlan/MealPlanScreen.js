@@ -38,6 +38,7 @@ class MealPlanScreen extends React.Component {
     this.onMealAdded = (mealType) => {
       this.props.addPlannedMeal(this.props.navigation.getParam('mealName'),
         this.props.navigation.getParam('dayOfWeek'), mealType);
+      this.props.getPlannedMeals();
     }
   }
 

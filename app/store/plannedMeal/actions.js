@@ -34,7 +34,6 @@ export const getPlannedMeals = () => {
             .catch(function (error) {
                 console.log("Error getting documents: ", error);
                 dispatch(getPlannedMealsError(error));
-
             });
     }
 }
