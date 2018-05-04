@@ -17,6 +17,7 @@ import { addMeal } from '../../store/meal/actions';
 import { addPlannedMeal } from '../../store/plannedMeal/actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getPlannedMeals } from '../../store/plannedMeal/actions';
 
 class MealPlanScreen extends React.Component {
   static navigationOptions = {
@@ -31,9 +32,35 @@ class MealPlanScreen extends React.Component {
       }
       return false;
     }
+    this.state = {
+      plannedMeals: {}
+    }
     this.onMealAdded = (mealType) => {
       this.props.addPlannedMeal(this.props.navigation.getParam('mealName'),
         this.props.navigation.getParam('dayOfWeek'), mealType);
+    }
+  }
+
+  componentDidMount() {
+    this.props.getPlannedMeals();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.plannedMeals && nextProps.plannedMeals.size > 0) {
+      let retrievedMeals = {
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: [],
+        saturday: [],
+        sunday: []
+      };
+      const plannedMealsForDay = nextProps.plannedMeals.forEach((plannedMeal) => {
+        let thisMeal = plannedMeal.data();
+        retrievedMeals[thisMeal.day].push(thisMeal);
+      });
+      this.setState({ plannedMeals: retrievedMeals });
     }
   }
 
@@ -47,10 +74,11 @@ class MealPlanScreen extends React.Component {
           data={[{ title: 'MONDAY', key: 'monday' }, { title: 'TUESDAY', key: 'tuesday' }, { title: 'WEDNESDAY', key: 'wednesday' },
           { title: 'THURSDAY', key: 'thursday' }, { title: 'FRIDAY', key: 'friday' }]}
           renderItem={({ item }) =>
-            <PlannedMealsCard 
+            <PlannedMealsCard
+              meals={this.state.plannedMeals[item.key]}
               navigation={this.props.navigation}
               dayOfWeek={item.key} />
-            }
+          }
         />
       </View>
     );
@@ -63,6 +91,7 @@ MealPlanScreen.propTypes = {
 
 const mapDispatchToProps = {
   addPlannedMeal: addPlannedMeal,
+  getPlannedMeals: getPlannedMeals
 }
 
 const mapStateToProps = state => ({

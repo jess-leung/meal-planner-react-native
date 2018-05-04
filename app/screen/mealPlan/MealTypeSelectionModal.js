@@ -64,6 +64,4 @@ class MealTypeSelectionModal extends React.Component {
     }
 }
 
-
-
 export default MealTypeSelectionModal
